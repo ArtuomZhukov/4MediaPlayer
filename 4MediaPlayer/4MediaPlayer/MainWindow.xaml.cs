@@ -43,11 +43,11 @@ namespace _4MediaPlayer
 
         private void StartStopVideoButton_Click(object sender, RoutedEventArgs e)
         {
-            //Uri source = new Uri(path);
-            //VideoPlayer.Source = source;
-            //VideoPlayer.Play();
-            string html = @"<iframe width=""560"" height=""315"" src=""http://www.youtube.com/watch?v=gToqBo7T-tI"" frameborder=""0"" allowfullscreen></iframe>";
-            myWebView.NavigateToString(html);
+            Uri source = new Uri(path);
+            VideoPlayer.Source = source;
+            VideoPlayer.Play();
+            //string html = @"<iframe width=""560"" height=""315"" src=""http://www.youtube.com/watch?v=gToqBo7T-tI"" frameborder=""0"" allowfullscreen></iframe>";
+            //myWebView.NavigateToString(html);
         }
     }
 }
