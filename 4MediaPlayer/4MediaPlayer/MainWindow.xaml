@@ -6,13 +6,25 @@
         xmlns:local="clr-namespace:_4MediaPlayer"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <!--Microsoft.Toolkit.Wpf.UI.Controls.WebView-->
-        <MediaElement Name="VideoPlayer" Margin="0,0,0,0" UnloadedBehavior="Manual" LoadedBehavior="Manual" />
-        <!--<WebView x:Name="myWebView" Source="ms-appdata:///local/intro/welcome.html" Margin="0,0,0,40"/>-->
-        <Button x:Name="LoadVideo" Content="Загрузить видео" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="120" Margin="10,0,0,10" Click="LoadVideo_Click"/>
-        <Button x:Name="StartStopVideoButton" Content="➤" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="26" Margin="200,0,0,10" Click="StartStopVideoButton_Click"  Background="{x:Null}"/>
-        <TextBox Name="Qwe" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="504" Margin="278,0,0,10"/>
+    <UniformGrid Name="MainGrid" Background="#FFE5E5E5">
+        <Grid Name="MediaPlayerElement">
+            <MediaElement Name="VideoPlayer" Margin="0,0,0,0" UnloadedBehavior="Manual" LoadedBehavior="Manual" />
+            <Button x:Name="LoadVideo" Content="Загрузить видео" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="120" Margin="10,0,0,10" Click="LoadVideo_Click"/>
+            <Button x:Name="StartStopVideoButton" Content="➤" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="26" Margin="200,0,0,10" Click="StartStopVideoButton_Click"  Background="{x:Null}"/>
+        </Grid>
+        
+        <ScrollViewer Height="128" Margin="10,0,10,3" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" VerticalAlignment="Bottom" >
+            <ScrollViewer.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" Opacity="0.95">
+                    <GradientStop Color="#FF202020" Offset="1"/>
+                    <GradientStop Color="#FF505050"/>
+                </LinearGradientBrush>
+            </ScrollViewer.Background>
+            <Grid>
+                <WrapPanel Name="VideoList" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Left" ScrollViewer.VerticalScrollBarVisibility="Auto" />
+            </Grid>
+        </ScrollViewer>
+        
+    </UniformGrid>
 
-    </Grid>
 </Window>
