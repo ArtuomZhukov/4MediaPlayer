@@ -8,15 +8,32 @@
         Title="MainWindow" Height="450" Width="800">
     <DockPanel Name="MainGrid" Background="#FF2D2D2D">
 
-        <ScrollViewer DockPanel.Dock="Right" Width="180" Visibility="Visible" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Right" Background="#FF1A1A1A" >
+        <ScrollViewer DockPanel.Dock="Right" Width="160" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Right" Background="#FF1A1A1A" >
+            <ScrollViewer.Style>
+                <Style TargetType="ScrollViewer">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=isVisiblePlaylist, Path=IsChecked}" Value="False">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ScrollViewer.Style>
             <Grid>
-                <WrapPanel Name="VideoList" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Left" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                <WrapPanel Name="VideoList" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Left" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <local:MediaItem></local:MediaItem>
+                    <local:MediaItem></local:MediaItem>
+                    <local:MediaItem></local:MediaItem>
+                    <local:MediaItem></local:MediaItem>
+                    <local:MediaItem></local:MediaItem>
+                    <local:MediaItem></local:MediaItem>
+                </WrapPanel>
             </Grid>
         </ScrollViewer>
             
         <Grid Name="MediaPlayerElement">
             <MediaElement Name="VideoPlayer" UnloadedBehavior="Manual" LoadedBehavior="Manual" />
             <Button x:Name="LoadVideo" Content="Загрузить видео" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="120" Margin="10,0,0,10" Click="LoadVideo_Click"/>
+            <CheckBox x:Name="isVisiblePlaylist" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10"/>
             <Button x:Name="StartStopVideoButton" Content="➤" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="26" Margin="200,0,0,10" Click="StartStopVideoButton_Click"  Background="{x:Null}"/>
         </Grid>
         
