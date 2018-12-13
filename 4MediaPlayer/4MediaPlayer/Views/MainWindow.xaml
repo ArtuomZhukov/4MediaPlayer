@@ -25,18 +25,21 @@
                     <local:MediaItem></local:MediaItem>
                     <local:MediaItem></local:MediaItem>
                     <local:MediaItem></local:MediaItem>
-                    <local:MediaItem></local:MediaItem>
                 </WrapPanel>
             </Grid>
         </ScrollViewer>
-            
+
         <Grid Name="MediaPlayerElement">
             <MediaElement Name="VideoPlayer" UnloadedBehavior="Manual" LoadedBehavior="Manual" MouseLeftButtonDown="VideoPlayer_MouseLeftButtonDown"/>
             <Button x:Name="LoadVideo" Content="Загрузить видео" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="120" Margin="10,0,0,10" Click="LoadVideo_Click"/>
             <CheckBox x:Name="isVisiblePlaylist" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10"/>
             <Button x:Name="StartStopVideoButton" Content="➤" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="26" Margin="200,0,0,10" Click="StartStopVideoButton_Click"  Background="{x:Null}"/>
+
+            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Background="{x:Null}" Margin="349,120,343,245">
+                <ContentControl Height="50" Content="{StaticResource PlusIcon}" />
+            </Button>
         </Grid>
-        
+
     </DockPanel>
 
 </Window>
