@@ -34,10 +34,53 @@
             <Button x:Name="LoadVideo" Content="Загрузить видео" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="120" Margin="10,0,0,10" Click="LoadVideo_Click"/>
             <CheckBox x:Name="isVisiblePlaylist" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10"/>
             <Button x:Name="StartStopVideoButton" Content="➤" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="26" Margin="200,0,0,10" Click="StartStopVideoButton_Click"  Background="{x:Null}"/>
-
-            <!--<Button HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Background="{x:Null}" Margin="349,120,343,245">
-                <ContentControl Height="50" Content="{StaticResource Arrow}" />
-            </Button>-->
+            <WrapPanel  ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Left" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <Button Width="100" Background="{x:Null}">
+                    <ContentControl Height="50" Content="{StaticResource Play}" />
+                </Button>
+                <Button Width="100" Background="{x:Null}">
+                    <ContentControl Height="50" Content="{StaticResource Back}" />
+                </Button>
+                <Button Width="100" Background="{x:Null}">
+                    <ContentControl Height="50" Content="{StaticResource Next}" />
+                </Button>
+                <Button Width="100" Background="{x:Null}">
+                    <ContentControl Height="50" Content="{StaticResource VolumeFull}" />
+                </Button>
+                <Button Width="100" Background="{x:Null}">
+                    <ContentControl Height="50" Content="{StaticResource VolumeOff}" />
+                </Button>
+                <Button Width="100" Background="{x:Null}">
+                    <ContentControl Height="50" Content="{StaticResource VolumeMiddle}" />
+                </Button>
+                <Button Width="100" Background="{x:Null}">
+                    <ContentControl Height="50" Content="{StaticResource VolumeMin}" />
+                </Button>
+                <Button Width="100" Background="{x:Null}">
+                    <ContentControl Height="50" Content="{StaticResource FullScreen}" />
+                </Button>
+                <Button Width="100" Background="{x:Null}">
+                    <ContentControl Height="50" Content="{StaticResource LowScreen}" />
+                </Button>
+                <Button Width="100" Background="{x:Null}">
+                    <ContentControl Height="50" Content="{StaticResource Add}" />
+                </Button>
+                <Button Width="100" Background="{x:Null}">
+                    <ContentControl Height="50" Content="{StaticResource Video}" />
+                </Button>
+                <Button Width="100" Background="{x:Null}">
+                    <ContentControl Height="50" Content="{StaticResource Refresh}" />
+                </Button>
+                <Button Width="100" Background="{x:Null}">
+                    <ContentControl Height="50" Content="{StaticResource Play}" />
+                </Button>
+                <Button Width="100" Background="{x:Null}">
+                    <ContentControl Height="50" Content="{StaticResource Play}" />
+                </Button>
+                <Button Width="100" Background="{x:Null}">
+                    <ContentControl Height="50" Content="{StaticResource Play}" />
+                </Button>
+            </WrapPanel>
         </Grid>
 
     </DockPanel>
