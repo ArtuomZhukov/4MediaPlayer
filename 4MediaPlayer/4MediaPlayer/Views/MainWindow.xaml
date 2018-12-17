@@ -5,9 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_4MediaPlayer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Width="400" Height="400" MinWidth="400" MinHeight="400">
+    <Window.Style>
+        <Style TargetType="Window">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=mediaPlayer, Path=IsFullScreen}" Value="True">
+                    <Setter Property="WindowStyle" Value="None"/>
+                    <Setter Property="WindowState" Value="Maximized"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Style>
     <DockPanel Name="MainGrid" Background="#FF2D2D2D">
-
         <ScrollViewer DockPanel.Dock="Right" Width="160" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Right" Background="#FF1A1A1A" >
             <ScrollViewer.Style>
                 <Style TargetType="ScrollViewer">
@@ -30,11 +39,11 @@
         </ScrollViewer>
 
         <Grid Name="MediaPlayerElement">
-            <MediaElement Name="VideoPlayer" UnloadedBehavior="Manual" LoadedBehavior="Manual" MouseLeftButtonDown="VideoPlayer_MouseLeftButtonDown"/>
+            <local:MediaPlayer x:Name="mediaPlayer"></local:MediaPlayer>
             <Button x:Name="LoadVideo" Content="Загрузить видео" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="120" Margin="10,0,0,10" Click="LoadVideo_Click"/>
             <CheckBox x:Name="isVisiblePlaylist" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10"/>
             <Button x:Name="StartStopVideoButton" Content="➤" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="26" Margin="200,0,0,10" Click="StartStopVideoButton_Click"  Background="{x:Null}"/>
-            <WrapPanel  ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Left" ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <!--<WrapPanel Visibility="Collapsed" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Left" ScrollViewer.VerticalScrollBarVisibility="Auto">
                 <Button Width="100" Background="{x:Null}">
                     <ContentControl Height="50" Content="{StaticResource Play}" />
                 </Button>
@@ -80,7 +89,7 @@
                 <Button Width="100" Background="{x:Null}">
                     <ContentControl Height="50" Content="{StaticResource Play}" />
                 </Button>
-            </WrapPanel>
+            </WrapPanel>-->
         </Grid>
 
     </DockPanel>

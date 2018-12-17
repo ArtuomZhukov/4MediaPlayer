@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="_4MediaPlayer.MediaPlayer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:_4MediaPlayer"
+             Name="mediaPlayerMain" mc:Ignorable="d">
+    <Grid Background="#FF2D2D2D" MouseLeftButtonDown="MediaPlayer_MouseLeftButtonDown">
+        <MediaElement Name="mediaPlayer" UnloadedBehavior="Manual" LoadedBehavior="Manual"/>
+        <Border Name="PauseIcon">
+            <ContentControl Height="50" Content="{StaticResource Play}" />
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=mediaPlayerMain, Path=IsPause}" Value="False">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+        </Border>
+    </Grid>
+</UserControl>

@@ -5,7 +5,7 @@ namespace _4MediaPlayer
 {
     public partial class MediaItem : UserControl
     {
-        private MainWindow MainWindow;
+        //private MainWindow MainWindow;
 
         public string Path { get; }
 
