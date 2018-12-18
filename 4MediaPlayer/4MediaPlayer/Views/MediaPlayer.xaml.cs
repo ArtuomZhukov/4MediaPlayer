@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,18 +12,6 @@ namespace _4MediaPlayer
         public bool IsFullScreen { get; set; } = false;
         public bool IsPause { get; set; } = true;
 
-        private string mediaPath = "";
-
-        public string MediaPath
-        {
-            get => mediaPath;
-            set
-            {
-                mediaPath = value;
-                mediaPlayer.Source = new Uri(MediaPath);
-            }
-        }
-
         public MediaPlayer()
         {
             InitializeComponent();
@@ -32,7 +19,7 @@ namespace _4MediaPlayer
 
         public void PlayClick()
         {
-            if (mediaPath == "")
+            if (mediaPlayer.Source == null)
                 return;
             if (IsPause)
                 mediaPlayer.Play();
@@ -44,6 +31,7 @@ namespace _4MediaPlayer
         public void FullscreenClick()
         {
             IsFullScreen = !IsFullScreen;
+            RaisePropertyChanged("IsFullScreen");
         }
 
         private async void MediaPlayer_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -71,12 +59,6 @@ namespace _4MediaPlayer
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName]string prop = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-        }
-
         public class ClickAttach : FrameworkElement
         {
             public static int GetClicks(FrameworkElement ctrl)
@@ -92,6 +74,13 @@ namespace _4MediaPlayer
                               "Clicks",
                               typeof(int),
                               typeof(FrameworkElement));
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void RaisePropertyChanged([CallerMemberName] string prop = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
     }
 }

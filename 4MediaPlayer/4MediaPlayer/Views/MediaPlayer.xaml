@@ -4,20 +4,20 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:_4MediaPlayer"
-             Name="mediaPlayerMain" mc:Ignorable="d">
-    <Grid Background="#FF2D2D2D" MouseLeftButtonDown="MediaPlayer_MouseLeftButtonDown">
-        <MediaElement Name="mediaPlayer" UnloadedBehavior="Manual" LoadedBehavior="Manual"/>
-        <Border Name="PauseIcon">
-            <ContentControl Height="50" Content="{StaticResource Play}" />
-            <Border.Style>
-                <Style TargetType="Border">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding ElementName=mediaPlayerMain, Path=IsPause}" Value="False">
-                            <Setter Property="Visibility" Value="Collapsed"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Border.Style>
-        </Border>
+             mc:Ignorable="d">
+
+    <Grid Background="{StaticResource DarkBackgroundBrush}" MouseLeftButtonDown="MediaPlayer_MouseLeftButtonDown">
+        <MediaElement
+            Name="mediaPlayer"
+            UnloadedBehavior="Manual" 
+            LoadedBehavior="Manual"
+            Source="{Binding Path}"/>
+        <Grid
+            Height="25"
+            VerticalAlignment="Bottom">
+            <Button
+                Content="Play"/>
+
+        </Grid>
     </Grid>
 </UserControl>

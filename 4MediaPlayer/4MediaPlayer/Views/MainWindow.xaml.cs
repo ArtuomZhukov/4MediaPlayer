@@ -1,5 +1,17 @@
-﻿using Microsoft.Win32;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 
 namespace _4MediaPlayer
 {
@@ -8,23 +20,6 @@ namespace _4MediaPlayer
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        private void LoadVideo_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog myDialog = new OpenFileDialog
-            {
-                CheckFileExists = true,
-            };
-            if (myDialog.ShowDialog() == true)
-            {
-                mediaPlayer.MediaPath = myDialog.FileName;
-            }
-        }
-
-        private void StartStopVideoButton_Click(object sender, RoutedEventArgs e)
-        {
-            mediaPlayer.PlayClick();
         }
     }
 }
