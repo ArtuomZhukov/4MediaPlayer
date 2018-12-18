@@ -17,7 +17,7 @@ namespace _4MediaPlayer
 
         public string MediaPath
         {
-            get { return mediaPath; }
+            get => mediaPath;
             set
             {
                 mediaPath = value;
@@ -39,13 +39,11 @@ namespace _4MediaPlayer
             else
                 mediaPlayer.Pause();
             IsPause = !IsPause;
-            OnPropertyChanged("IsPause");
         }
 
         public void FullscreenClick()
         {
             IsFullScreen = !IsFullScreen;
-            OnPropertyChanged("IsFullScreen");
         }
 
         private async void MediaPlayer_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -73,6 +71,12 @@ namespace _4MediaPlayer
             }
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName]string prop = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+        }
+
         public class ClickAttach : FrameworkElement
         {
             public static int GetClicks(FrameworkElement ctrl)
@@ -88,12 +92,6 @@ namespace _4MediaPlayer
                               "Clicks",
                               typeof(int),
                               typeof(FrameworkElement));
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName]string prop = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
     }
 }
