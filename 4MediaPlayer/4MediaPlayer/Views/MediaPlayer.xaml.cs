@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using DevExpress.Mvvm;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
@@ -15,6 +16,17 @@ namespace _4MediaPlayer
         public MediaPlayer()
         {
             InitializeComponent();
+            mediaVolume.Value = 0.5;
+        }
+
+        private void PlayDefault_Click(object sender, RoutedEventArgs e)
+        {
+            PlayClick();
+        }
+
+        private void FullScreen_Click(object sender, RoutedEventArgs e)
+        {
+            FullscreenClick();
         }
 
         public void PlayClick()
@@ -31,7 +43,6 @@ namespace _4MediaPlayer
         public void FullscreenClick()
         {
             IsFullScreen = !IsFullScreen;
-            RaisePropertyChanged("IsFullScreen");
         }
 
         private async void MediaPlayer_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

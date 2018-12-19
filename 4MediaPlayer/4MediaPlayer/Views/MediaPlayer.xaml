@@ -11,12 +11,76 @@
             Name="mediaPlayer"
             UnloadedBehavior="Manual" 
             LoadedBehavior="Manual"
-            Source="{Binding Path}"/>
+            Source="{Binding Path}"
+            Volume="{Binding ElementName=mediaVolume, Path=Value}"/>
         <Grid
             Height="25"
             VerticalAlignment="Bottom">
-            <Button
-                Content="Play"/>
+            <Grid
+                Name="DefaultControls" Background="#19000000"
+                >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30" />
+                    <ColumnDefinition Width="30" />
+                    <ColumnDefinition Width="30" />
+                    <ColumnDefinition Width="40" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="40" />
+                    <ColumnDefinition Width="30" />
+                    <ColumnDefinition Width="70" />
+                    <ColumnDefinition Width="30" />
+                </Grid.ColumnDefinitions>
+                <Button
+                    Grid.Column="0"
+                    Content="Back"
+                    Width="30"/>
+                <Button
+                    Grid.Column="1"
+                    Name="PlayDefault"
+                    Content="Play"
+                    Command="{Binding Play}"
+                    Width="30" Click="PlayDefault_Click"/>
+                <Button
+                    Grid.Column="2"
+                    Content="Next"
+                    Width="30"/>
+                <TextBlock
+                    Grid.Column="3"
+                    Text="160:50" 
+                    Foreground="White" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center"/>
+                <Slider
+                    Grid.Column="4"
+                    VerticalAlignment="Center"/>
+                <TextBlock
+                    Grid.Column="5"
+                    Text="160:50" 
+                    Foreground="White" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center"/>
+                <Button
+                    Grid.Column="6"
+                    Content="Vol"
+                    Width="30"/>
+                <Slider
+                    Grid.Column="7"
+                    Name="mediaVolume"
+                    Maximum="1"
+                    Minimum="0"
+                    TickFrequency="0.1"
+                    VerticalAlignment="Center"/>
+                <Button
+                    Grid.Column="8"
+                    Name="FullScreen"
+                    Content="FScr"
+                    Width="30" Click="FullScreen_Click"/>
+            </Grid>
+            <Grid
+                Name="ImageControls">
+
+            </Grid>
+
 
         </Grid>
     </Grid>
