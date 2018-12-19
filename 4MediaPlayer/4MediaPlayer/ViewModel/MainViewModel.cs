@@ -25,6 +25,26 @@ namespace _4MediaPlayer.ViewModel
 
         }
 
+        private string _SearchText { get; set; }
+        public string SearchText
+        {
+            get => _SearchText;
+            set
+            {
+                _SearchText = value;
+                MediaView.Filter = (obj) =>
+                {
+                    if (obj is Media video)
+                    {
+                        return video.Name.ToLower().Contains(SearchText.ToLower());
+                    }
+                    return false;
+                };
+                MediaView.Refresh();
+
+            }
+        }
+
         public ICommand AddItem
         {
             get
@@ -67,17 +87,6 @@ namespace _4MediaPlayer.ViewModel
             }
         }
 
-        public ICommand Clear
-        {
-            get
-            {
-                return new DelegateCommand(() =>
-                {
-                    MediaCollection.Clear();
-                });
-            }
-        }
-
         private void LoadMedia(string[] files, bool clear = false)
         {
             if (clear && files.Length > 0)
@@ -96,5 +105,17 @@ namespace _4MediaPlayer.ViewModel
             }
             SelectedMedia = MediaCollection.FirstOrDefault(s => s.Path == files.FirstOrDefault());
         }
+
+        public ICommand Clear
+        {
+            get
+            {
+                return new DelegateCommand(() =>
+                {
+                    MediaCollection.Clear();
+                });
+            }
+        }
+
     }
 }
