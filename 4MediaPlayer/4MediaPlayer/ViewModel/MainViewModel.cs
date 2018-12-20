@@ -23,7 +23,6 @@ namespace _4MediaPlayer.ViewModel
             MediaCollection = new ObservableCollection<Media>();
             BindingOperations.EnableCollectionSynchronization(MediaCollection, new object());
             MediaView = CollectionViewSource.GetDefaultView(MediaCollection);
-
         }
 
         private string _SearchText { get; set; }
@@ -98,38 +97,11 @@ namespace _4MediaPlayer.ViewModel
             {
                 var file = files[i];
 
-                Media.MediaType mediaType;
-                string ext = Path.GetExtension(file).ToLower();
-                switch (ext)
-                {
-                    case ".mkv":
-                    case ".mp4":
-                    case ".avi":
-                    case ".wmv":
-                        mediaType = Media.MediaType.Video;
-                        break;
-                    case ".mp3":
-                    case ".wav":
-                    case ".flac":
-                        mediaType = Media.MediaType.Audio;
-                        break;
-                    case ".png":
-                    case ".jpg":
-                    case ".jpeg":
-                        mediaType = Media.MediaType.Image;
-                        break;
-                    case ".gif":
-                        mediaType = Media.MediaType.Gif;
-                        break;
-                    default:
-                        continue;
-                }
-
                 MediaCollection.Add(new Media
                 {
                     Path = file,
                     Name = Path.GetFileNameWithoutExtension(file),
-                    Type = mediaType
+                    Type = Media.GetType(file)
                 });
             }
             SelectedMedia = MediaCollection.FirstOrDefault(s => s.Path == files.FirstOrDefault());

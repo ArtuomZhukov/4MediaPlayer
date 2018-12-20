@@ -7,7 +7,8 @@
              xmlns:local="clr-namespace:_4MediaPlayer"
              mc:Ignorable="d"
              MinWidth="400"
-             MinHeight="300">
+             MinHeight="300"
+             Name="MediaPlayerBase">
 
     <Grid 
         Background="{StaticResource DarkBackgroundBrush}" 
@@ -20,16 +21,14 @@
             LoadedBehavior="Manual"
             Source="{Binding Path}"
             Volume="{Binding ElementName=mediaVolume, Path=Value}"
-            MediaOpened="mediaPlayer_MediaOpened">
-        </MediaElement>
+            MediaOpened="MediaPlayer_MediaOpened"/>
         <Grid
             Name="mediaPlayerControls"
             Height="25"
             VerticalAlignment="Bottom">
             <Grid
                 Name="DefaultControls" 
-                Background="#19000000"
-                >
+                Background="#50000000">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="30" />
                     <ColumnDefinition Width="60" />
@@ -41,8 +40,23 @@
                 <Button
                     Grid.Column="0"
                     Name="PlayDefault"
-                    Content="Play"
-                    Width="30" Click="PlayDefault_Click"/>
+                    Content="{StaticResource Play}"
+                    Width="30" 
+                    Click="PlayDefault_Click" 
+                    Padding="-5" 
+                    Background="{x:Null}" 
+                    BorderBrush="{x:Null}" 
+                    Foreground="{x:Null}">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=MediaPlayerBase, Path=IsPause}" Value="True">
+                                    <Setter Property="Content" Value="{StaticResource Pause}" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
                 <Label
                     Grid.Column="1"
                     Name="VideoTimeLabel"
@@ -79,10 +93,10 @@
                     Width="30" 
                     Click="FullScreen_Click"/>
             </Grid>
-            <Grid
+            <!--<Grid
                 Name="ImageControls">
 
-            </Grid>
+            </Grid>-->
 
 
         </Grid>

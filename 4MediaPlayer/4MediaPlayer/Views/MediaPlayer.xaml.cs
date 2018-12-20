@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
+using _4MediaPlayer.Model;
 
 namespace _4MediaPlayer
 {
@@ -17,7 +18,7 @@ namespace _4MediaPlayer
 
         TimeSpan videoTimeSpan;
         DispatcherTimer VideoTimer;
-
+        Media.MediaType mediaType;
         public MediaPlayer()
         {
             InitializeComponent();
@@ -44,10 +45,24 @@ namespace _4MediaPlayer
             mediaPlayer.IsMuted = !mediaPlayer.IsMuted;
         }
 
-        private void mediaPlayer_MediaOpened(object sender, RoutedEventArgs e)
+        private void MediaPlayer_MediaOpened(object sender, RoutedEventArgs e)
         {
-            videoTimeSpan = TimeSpan.FromMilliseconds(mediaPlayer.NaturalDuration.TimeSpan.TotalMilliseconds);
-            VideoTimeSlider.Maximum = videoTimeSpan.TotalSeconds;
+            mediaType = Media.GetType(mediaPlayer.Source.ToString());
+            if (mediaType == Media.MediaType.Video || 
+                mediaType == Media.MediaType.Audio)
+            {
+                videoTimeSpan = TimeSpan.FromMilliseconds(mediaPlayer.NaturalDuration.TimeSpan.TotalMilliseconds);
+                VideoTimeSlider.Maximum = videoTimeSpan.TotalSeconds;
+                mediaPlayerControls.Visibility = Visibility.Visible;
+                if (!IsPause)
+                    PlayClick();
+            }
+            else if (mediaType == Media.MediaType.Image)
+            {
+                mediaPlayerControls.Visibility = Visibility.Hidden;
+                if (IsPause)
+                    PlayClick();
+            }
         }
         private void VideoTimeSlider_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
@@ -79,18 +94,22 @@ namespace _4MediaPlayer
 
         private void VideoTimerTick(object sender, EventArgs e)
         {
-            VideoTimeSlider.Value = mediaPlayer.Position.TotalSeconds;
-            if (VideoTimeSlider.Value == VideoTimeSlider.Maximum)
-                PlayClick();
-            else
-                VideoTimeLabel.Content = String.Format("{0}:{1}/{2}:{3}",
-                    mediaPlayer.Position.Minutes, mediaPlayer.Position.Seconds,
-                videoTimeSpan.Minutes, videoTimeSpan.Seconds);
+            if (mediaType == Media.MediaType.Video ||
+                mediaType == Media.MediaType.Audio)
+            {
+                VideoTimeSlider.Value = mediaPlayer.Position.TotalSeconds;
+                if (VideoTimeSlider.Value == VideoTimeSlider.Maximum)
+                    PlayClick();
+                else
+                    VideoTimeLabel.Content = string.Format("{0}:{1}/{2}:{3}",
+                        mediaPlayer.Position.Minutes, mediaPlayer.Position.Seconds,
+                    videoTimeSpan.Minutes, videoTimeSpan.Seconds);
+            }
         }
 
         private void VideoPlayer_MouseEnter(object sender, MouseEventArgs e)
         {
-            if (mediaPlayer.Source != null)
+            if (mediaPlayer.Source != null && mediaType != Media.MediaType.Image)
                 mediaPlayerControls.Visibility = Visibility.Visible;
         }
 

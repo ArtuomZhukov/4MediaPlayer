@@ -11,7 +11,9 @@
     Title="4MediaPlayer" 
     Name="Main"
     Height="450" 
-    Width="800">
+    Width="800"
+    MinWidth="700"
+    MinHeight="400">
 
     <Window.DataContext>
         <viewmodel:MainViewModel />
@@ -109,7 +111,6 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Button 
                     Command="{Binding AddItem}"
@@ -120,12 +121,9 @@
                     Content="Load" 
                     Grid.Column="1"/>
                 <Button 
-                    Content="PrShow" 
-                    Grid.Column="2"/>
-                <Button 
                     Command="{Binding Clear}"
                     Content="Clear" 
-                    Grid.Column="3"/>
+                    Grid.Column="2"/>
             </Grid>
         </Grid>
     </Grid>
