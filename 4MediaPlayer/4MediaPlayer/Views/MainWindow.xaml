@@ -37,15 +37,44 @@
         <Grid 
             Grid.Column="0"
             DataContext="{Binding SelectedMedia}">
-
+            
             <local:MediaPlayer
                 x:Name="mediaPlayer"/>
 
+            <!--<Grid
+                Margin="0,0,0,25">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="20"/>
+                </Grid.ColumnDefinitions>
+                <Border 
+                    Grid.Column="0"
+                    Name="DragDropAdd"
+                    AllowDrop="True" 
+                    Background="#33000000" 
+                    BorderBrush="White" 
+                    BorderThickness="4" 
+                    CornerRadius="20" >
+                    
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20">Add</TextBlock>
+                </Border>
+                <Border 
+                    Grid.Column="1"
+                    Name="DragDropLoad"
+                    AllowDrop="True" 
+                    Background="#33000000" 
+                    BorderBrush="White" 
+                    BorderThickness="4" 
+                    CornerRadius="20">
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20">Load</TextBlock>
+                </Border>
+            </Grid>
             <Button 
                 Content=">"
                 Width="20" 
                 HorizontalAlignment="Right" 
-                Margin="0,0,0,25" Background="#50000000"/>
+                Margin="0,0,0,25" Background="#50000000"/>-->
         </Grid>
 
         <Grid Grid.Column="1">

@@ -8,6 +8,7 @@ using System.Windows.Input;
 using Microsoft.Win32;
 using DevExpress.Mvvm;
 using _4MediaPlayer.Model;
+using System.Windows;
 
 namespace _4MediaPlayer.ViewModel
 {
@@ -97,10 +98,38 @@ namespace _4MediaPlayer.ViewModel
             {
                 var file = files[i];
 
+                Media.MediaType mediaType;
+                string ext = Path.GetExtension(file).ToLower();
+                switch (ext)
+                {
+                    case ".mkv":
+                    case ".mp4":
+                    case ".avi":
+                    case ".wmv":
+                        mediaType = Media.MediaType.Video;
+                        break;
+                    case ".mp3":
+                    case ".wav":
+                    case ".flac":
+                        mediaType = Media.MediaType.Audio;
+                        break;
+                    case ".png":
+                    case ".jpg":
+                    case ".jpeg":
+                        mediaType = Media.MediaType.Image;
+                        break;
+                    case ".gif":
+                        mediaType = Media.MediaType.Gif;
+                        break;
+                    default:
+                        continue;
+                }
+
                 MediaCollection.Add(new Media
                 {
                     Path = file,
                     Name = Path.GetFileNameWithoutExtension(file),
+                    Type = mediaType
                 });
             }
             SelectedMedia = MediaCollection.FirstOrDefault(s => s.Path == files.FirstOrDefault());
@@ -117,6 +146,25 @@ namespace _4MediaPlayer.ViewModel
             }
         }
 
+        public ICommand AddDrop
+        {
+            get
+            {
+                return new DelegateCommand<DragEventArgs>((e) =>
+                {
+                    LoadMedia((string[])e.Data.GetData(DataFormats.FileDrop));
+                });
+            }
+        }
 
+        public void AddDropMedia(object sender, DragEventArgs e)
+        {
+            LoadMedia((string[])e.Data.GetData(DataFormats.FileDrop));
+        }
+
+        public void LoadDropMedia(object sender, DragEventArgs e)
+        {
+            LoadMedia((string[])e.Data.GetData(DataFormats.FileDrop), true);
+        }
     }
 }
