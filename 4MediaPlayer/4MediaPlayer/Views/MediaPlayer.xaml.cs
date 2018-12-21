@@ -22,6 +22,7 @@ namespace _4MediaPlayer
         public MediaPlayer()
         {
             InitializeComponent();
+            //DataContext = this;
             mediaVolume.Value = 0.5;
             mediaPlayerControls.Visibility = Visibility.Hidden;
 
