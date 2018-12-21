@@ -100,7 +100,7 @@ namespace _4MediaPlayer.ViewModel
                 MediaCollection.Add(new Media
                 {
                     Path = file,
-                    Name = Path.GetFileNameWithoutExtension(file),
+                    Name = Path.GetFileName(file),
                     Type = Media.GetType(file)
                 });
             }
