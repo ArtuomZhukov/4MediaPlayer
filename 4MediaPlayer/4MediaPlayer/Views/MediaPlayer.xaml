@@ -21,10 +21,6 @@
             Source="{Binding Path}"
             Volume="{Binding ElementName=mediaVolume, Path=Value}"
             MediaOpened="MediaPlayer_MediaOpened"/>
-        <Border
-            >
-            
-        </Border>
         <Grid
             Name="mediaPlayerControls">
             <Grid
@@ -51,44 +47,44 @@
                     <ColumnDefinition Width="35" />
                 </Grid.ColumnDefinitions>
                 <Button
-                Grid.Column="0"
-                Name="PlayDefault"
-                Width="35" 
-                Click="PlayDefault_Click" 
-                Padding="0">
+                    Grid.Column="0"
+                    Name="PlayDefault"
+                    Width="35" 
+                    Click="PlayDefault_Click" 
+                    Padding="0">
                     <Button.Style>
                         <Style TargetType="Button" BasedOn="{StaticResource ControllButton}">
-                            <Setter Property="Content" Value="{DynamicResource Play}" />
+                            <Setter Property="Content" Value="{StaticResource Play}" />
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding ElementName=MediaPlayerBase, Path=IsPause}" Value="False">
-                                    <Setter Property="Content" Value="{DynamicResource Pause}" />
+                                    <Setter Property="Content" Value="{StaticResource Pause}" />
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
                     </Button.Style>
                 </Button>
                 <Label
-                Grid.Column="1"
-                Name="VideoTimeLabel"
-                Content="0:0/0:0" 
-                Foreground="White" 
-                HorizontalAlignment="Center" 
-                VerticalAlignment="Center"/>
+                    Grid.Column="1"
+                    Name="VideoTimeLabel"
+                    Content="0:0/0:0" 
+                    Foreground="White" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center"/>
                 <Slider
-                Grid.Column="2"
-                Name="VideoTimeSlider"
-                VerticalAlignment="Center"
-                Minimum="0"
-                Maximum="{Binding ElementName=mediaPlayer, Path=NaturalDuration}"
-                IsMoveToPointEnabled="True"
-                Value="{Binding ElementName=mediaPlayer, Path=Position }"
-                MouseLeftButtonUp="VideoTimeSlider_MouseLeftButtonUp"/>
+                    Grid.Column="2"
+                    Name="VideoTimeSlider"
+                    VerticalAlignment="Center"
+                    Minimum="0"
+                    Maximum="{Binding ElementName=mediaPlayer, Path=NaturalDuration}"
+                    IsMoveToPointEnabled="True"
+                    Value="{Binding ElementName=mediaPlayer, Path=Position }"
+                    MouseLeftButtonUp="VideoTimeSlider_MouseLeftButtonUp"/>
                 <Button
-                Grid.Column="3"
-                Name="Mute"
-                Width="35"
-                Padding="0" 
-                Click="Mute_Click">
+                    Grid.Column="3"
+                    Name="Mute"
+                    Width="35"
+                    Padding="0" 
+                    Click="Mute_Click">
                     <Button.Style>
                         <Style TargetType="Button" BasedOn="{StaticResource ControllButton}">
                             <Setter Property="Content" Value="{StaticResource VolumeFull}" />
@@ -101,18 +97,18 @@
                     </Button.Style>
                 </Button>
                 <Slider
-                Grid.Column="4"
-                Name="mediaVolume"
-                Maximum="1"
-                Minimum="0"
-                TickFrequency="0.1"
-                IsMoveToPointEnabled="True"
-                VerticalAlignment="Center"/>
+                    Grid.Column="4"
+                    Name="mediaVolume"
+                    Maximum="1"
+                    Minimum="0"
+                    TickFrequency="0.1"
+                    IsMoveToPointEnabled="True"
+                    VerticalAlignment="Center"/>
                 <Button
-                Grid.Column="5"
-                x:Name="FullScreen"
-                Width="35" 
-                Click="FullScreen_Click">
+                    Grid.Column="5"
+                    x:Name="FullScreen"
+                    Width="35" 
+                    Click="FullScreen_Click">
                     <Button.Style>
                         <Style TargetType="Button" BasedOn="{StaticResource ControllButton}">
                             <Setter Property="Content" Value="{StaticResource FullScreen}" />

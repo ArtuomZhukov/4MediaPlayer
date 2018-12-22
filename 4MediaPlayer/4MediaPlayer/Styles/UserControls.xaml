@@ -25,6 +25,7 @@
                     FontWeight="Bold"
                     Foreground="Gray"
                     Text="{Binding Name}"
+                    ToolTip="{Binding Name}"
                     TextAlignment="Left"
                     TextTrimming="CharacterEllipsis" />
             </Border>

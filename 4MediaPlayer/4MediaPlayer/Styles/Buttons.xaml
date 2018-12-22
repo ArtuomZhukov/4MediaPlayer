@@ -65,8 +65,7 @@
                 <ControlTemplate TargetType="ToggleButton">
                     <Border
                         Name="brd"
-                        Background="#01000000"
-                        CornerRadius="2">
+                        Background="#01000000">
                         <ContentPresenter
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center" />

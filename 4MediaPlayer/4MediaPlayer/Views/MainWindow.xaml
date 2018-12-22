@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:local="clr-namespace:_4MediaPlayer"
     xmlns:model="clr-namespace:_4MediaPlayer.Model"
     xmlns:viewmodel="clr-namespace:_4MediaPlayer.ViewModel"
@@ -17,9 +18,16 @@
     MinHeight="400"
     BorderBrush="#41b1e1"
     BorderThickness="1"
+
     Background="{StaticResource DarkBackgroundBrush}"
     WindowStartupLocation="CenterScreen">
 
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="ContentRendered">
+            <i:InvokeCommandAction Command="{Binding Path=AtStart}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    
     <Controls:MetroWindow.DataContext>
         <viewmodel:MainViewModel />
     </Controls:MetroWindow.DataContext>
@@ -44,6 +52,7 @@
 
     <DockPanel>
         <Grid 
+            x:Name="mediaList"
             DockPanel.Dock="Right"
             Width="180"
             Background="{StaticResource DarkListBackgroundBrush}">
@@ -62,27 +71,28 @@
                 <RowDefinition Height="30" />
             </Grid.RowDefinitions>
 
-            <DockPanel>
+            <DockPanel
+                Grid.Row="0">
                 <ContentControl
-                            Width="30"
-                            Background="{StaticResource MediumBaseBrush}"
-                            Content="{StaticResource SearchIcon}"
-                            Style="{StaticResource IconContent}" />
+                    Width="30"
+                    Background="{StaticResource MediumBaseBrush}"
+                    Content="{StaticResource SearchIcon}"
+                    Style="{StaticResource IconContent}" />
                 <TextBox 
-                    Tag="Поиск по названию"
+                    Tag="Find media by name"
                     Style="{StaticResource BaseTextBox}"
                     Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
             </DockPanel>
 
             <ListBox
-            Grid.Row="1"
-            SelectionMode="Extended"
-            HorizontalContentAlignment="Stretch"
-            BorderThickness="0"
-            Background="{StaticResource DarkListBackgroundBrush}"
-            ItemsSource="{Binding MediaView}"
-            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-            SelectedItem="{Binding SelectedMedia}">
+                Grid.Row="1"
+                SelectionMode="Extended"
+                HorizontalContentAlignment="Stretch"
+                BorderThickness="0"
+                Background="{StaticResource DarkListBackgroundBrush}"
+                ItemsSource="{Binding MediaView, Mode=TwoWay}"
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                SelectedItem="{Binding SelectedMedia}">
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">
                         <Setter Property="Template" Value="{StaticResource MediaListItems}" />
@@ -98,7 +108,7 @@
                 </Grid.ColumnDefinitions>
                 <Button
                     Grid.Column="0"
-                    Padding="0"
+                    ToolTip="Add media to list"
                     Command="{Binding AddItem}"
                     Style="{StaticResource BaseButton}">
                     <ContentControl 
@@ -107,6 +117,7 @@
                 </Button>
                 <Button 
                     Grid.Column="1"
+                    ToolTip="Upload medialist"
                     Command="{Binding LoadItem}"
                     Style="{StaticResource BaseButton}">
                     <ContentControl 
@@ -115,14 +126,13 @@
                 </Button>
                 <Button 
                     Grid.Column="2"
-                    Padding="0"
+                    ToolTip="Clear medialist"
                     Command="{Binding Clear}"
                     Style="{StaticResource BaseButton}">
                     <ContentControl 
                         Height="20" 
                         Content="{StaticResource Clear}" />
                 </Button>
-
             </Grid>
         </Grid>
 
@@ -132,6 +142,7 @@
 
             <local:MediaPlayer
                 x:Name="mediaPlayer"/>
+            
             <ToggleButton 
                 Width="32"
                 Height="32"
@@ -141,19 +152,24 @@
                 VerticalAlignment="Top"
                 IsChecked="True">
                 <ContentControl 
-                        Height="20" 
-                        Content="{StaticResource List}" />
+                    Height="20" 
+                    Content="{StaticResource List}" />
                 <ToggleButton.Style>
                     <Style TargetType="ToggleButton" BasedOn="{StaticResource ControllToggleButton}">
                         <Setter Property="Visibility" Value="Hidden"/>
+                        <Setter Property="ToolTip" Value="Show medialist"/>
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding ElementName=MediaPlace, Path=IsMouseOver}" Value="True">
                                 <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding ElementName=mediaList, Path=Visibility}" Value="Visible">
+                                <Setter Property="ToolTip" Value="Hide medialist"/>
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
                 </ToggleButton.Style>
             </ToggleButton>
+            
         </Grid>
     </DockPanel>
 </Controls:MetroWindow>

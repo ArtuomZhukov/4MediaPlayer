@@ -1,5 +1,4 @@
-﻿using DevExpress.Mvvm;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -19,10 +18,10 @@ namespace _4MediaPlayer
         TimeSpan videoTimeSpan;
         DispatcherTimer VideoTimer;
         Media.MediaType mediaType;
+
         public MediaPlayer()
         {
             InitializeComponent();
-            //DataContext = this;
             mediaVolume.Value = 0.5;
             mediaPlayerControls.Visibility = Visibility.Hidden;
 
@@ -104,7 +103,7 @@ namespace _4MediaPlayer
                 else
                     VideoTimeLabel.Content = string.Format("{0}:{1}/{2}:{3}",
                         mediaPlayer.Position.Minutes, mediaPlayer.Position.Seconds,
-                    videoTimeSpan.Minutes, videoTimeSpan.Seconds);
+                        videoTimeSpan.Minutes, videoTimeSpan.Seconds);
             }
         }
 
@@ -162,7 +161,6 @@ namespace _4MediaPlayer
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
         public void RaisePropertyChanged([CallerMemberName] string prop = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));

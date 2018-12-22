@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -25,6 +26,22 @@ namespace _4MediaPlayer.ViewModel
             MediaView = CollectionViewSource.GetDefaultView(MediaCollection);
         }
 
+        public ICommand AtStart
+        {
+            get
+            {
+                return new DelegateCommand(() =>
+                {
+                    var files = Environment.GetCommandLineArgs();
+                    LoadMedia(files);
+                    if (MediaCollection.Count > 0)
+                    {
+                        SelectedMedia = MediaCollection[0];
+                    }
+                });
+            }
+        }
+
         private string _SearchText { get; set; }
         public string SearchText
         {
@@ -41,7 +58,6 @@ namespace _4MediaPlayer.ViewModel
                     return false;
                 };
                 MediaView.Refresh();
-
             }
         }
 
@@ -87,22 +103,27 @@ namespace _4MediaPlayer.ViewModel
             }
         }
 
-        private void LoadMedia(string[] files, bool clear = false)
+        public void LoadMedia(string[] files, bool clear = false)
         {
             if (clear && files.Length > 0)
             {
                 MediaCollection.Clear();
             }
-            for (int i = 0; i < files.Length; i++)
+            foreach (var file in files)
             {
-                var file = files[i];
-
-                MediaCollection.Add(new Media
+                if (File.Exists(file))
                 {
-                    Path = file,
-                    Name = Path.GetFileName(file),
-                    Type = Media.GetType(file)
-                });
+                    Media.MediaType type = Media.GetType(file);
+                    if (type != Media.MediaType.Unknown)
+                    {
+                        MediaCollection.Add(new Media
+                        {
+                            Path = file,
+                            Type = type,
+                            Name = Path.GetFileName(file)
+                        });
+                    }
+                }
             }
             SelectedMedia = MediaCollection.FirstOrDefault(s => s.Path == files.FirstOrDefault());
         }
@@ -116,27 +137,6 @@ namespace _4MediaPlayer.ViewModel
                     MediaCollection.Clear();
                 });
             }
-        }
-
-        public ICommand AddDrop
-        {
-            get
-            {
-                return new DelegateCommand<DragEventArgs>((e) =>
-                {
-                    LoadMedia((string[])e.Data.GetData(DataFormats.FileDrop));
-                });
-            }
-        }
-
-        public void AddDropMedia(object sender, DragEventArgs e)
-        {
-            LoadMedia((string[])e.Data.GetData(DataFormats.FileDrop));
-        }
-
-        public void LoadDropMedia(object sender, DragEventArgs e)
-        {
-            LoadMedia((string[])e.Data.GetData(DataFormats.FileDrop), true);
         }
     }
 }
